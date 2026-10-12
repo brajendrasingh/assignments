@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequestMapping("/api/employees")
 @RestController
 public class EmployeeController {
 
@@ -15,6 +16,12 @@ public class EmployeeController {
 
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
+    }
+
+    @PostMapping("/addAll")
+    public ResponseEntity<List<Employee>> addAllEmployee(@RequestBody List<Employee> employee) {
+        List<Employee> savedEmployee = employeeService.saveAllEmployee(employee);
+        return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
     }
 
     // 1. Endpoint to ADD a new employee

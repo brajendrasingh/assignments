@@ -1,0 +1,24 @@
+[
+    {
+        "name": "Arjun Sharma",
+        "email": "arjun.sharma@example.com",
+        "jobType": "Full-Time",
+        "designation": "Senior Software Engineer",
+        "department": "Engineering",
+        "salary": 85000.50,
+        "address": {
+            "address": "123 Tech Park Avenue, Sector 62, Noida, UP, 201301"
+        }
+    },
+    {
+        "name": "Raj Malhotra",
+        "email": "raj.malhotra@example.com",
+        "jobType": "Part-Time",
+        "designation": "Staff Software Engineer",
+        "department": "Engineering",
+        "salary": 95000.50,
+        "address": {
+            "address": "123 Tech Park Avenue, Sector 65, Noida, UP, 201301"
+        }
+    }
+]

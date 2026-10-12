@@ -8,7 +8,7 @@ spring:
     name: ems
 
   datasource:
-    url: jdbc:h2:mem:portal
+    url: jdbc:h2:mem:ems
     driverClassName: org.h2.Driver
     username: root
     password: root

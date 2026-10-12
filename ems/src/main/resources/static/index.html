@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management System</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6fb;
+            color: #263248;
+        }
+
+        header {
+            background: #243b80;
+            color: white;
+            padding: 22px 5%;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 26px;
+        }
+
+        header p {
+            margin-bottom: 0;
+            color: #dbe5ff;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 24px;
+            margin-bottom: 24px;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 21px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccd3df;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        input:focus, select:focus {
+            outline: 2px solid #c6d5ff;
+            border-color: #345bd6;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+            border-radius: 6px;
+            padding: 10px 16px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .primary {
+            background: #345bd6;
+            color: white;
+        }
+
+        .secondary {
+            background: #e9edf5;
+            color: #263248;
+        }
+
+        .danger {
+            background: #ffe7e7;
+            color: #b42318;
+        }
+
+        .small {
+            padding: 7px 10px;
+            margin: 2px;
+        }
+
+        .search-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+
+        .search-row input {
+            max-width: 350px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            white-space: nowrap;
+        }
+
+        th, td {
+            padding: 13px 12px;
+            text-align: left;
+            border-bottom: 1px solid #e8ebf1;
+            font-size: 14px;
+        }
+
+        th {
+            background: #f7f8fc;
+            color: #536079;
+        }
+
+        .message {
+            display: none;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 18px;
+        }
+
+        .success {
+            display: block;
+            background: #e5f7eb;
+            color: #176b37;
+        }
+
+        .error {
+            display: block;
+            background: #ffebeb;
+            color: #a21d1d;
+        }
+
+        .muted {
+            color: #65718a;
+            font-size: 13px;
+        }
+
+        @media (max-width: 650px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Employee Management System</h1>
+    <p>Add, view, update, and manage employees</p>
+</header>
+<main>
+    <div id="message" class="message" role="status" aria-live="polite"></div>
+    <section class="card">
+        <h2 id="formTitle">Add Employee</h2>
+
+        <form id="employeeForm">
+            <div class="form-grid">
+                <div class="field">
+                    <label for="name">Full Name *</label>
+                    <input id="name" name="name" required maxlength="100" placeholder="Enter full name">
+                </div>
+
+                <div class="field">
+                    <label for="email">Email *</label>
+                    <input id="email" name="email" type="email" required maxlength="150" placeholder="name@example.com">
+                </div>
+
+                <div class="field">
+                    <label for="jobType">Job Type</label>
+                    <select id="jobType" name="jobType">
+                        <option value="">Select job type</option>
+                        <option value="Full-time">Full-time</option>
+                        <option value="Part-time">Part-time</option>
+                        <option value="Contract">Contract</option>
+                        <option value="Intern">Intern</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="designation">Designation</label>
+                    <input id="designation" name="designation" maxlength="100" placeholder="e.g. Software Engineer">
+                </div>
+
+                <div class="field">
+                    <label for="department">Department</label>
+                    <input id="department" name="department" maxlength="100" placeholder="e.g. Engineering">
+                </div>
+
+                <div class="field">
+                    <label for="salary">Salary</label>
+                    <input id="salary" name="salary" type="number" min="0" step="0.01" value="0" required>
+                </div>
+
+                <div class="field">
+                    <label for="address">Address</label>
+                    <input id="address" name="address" maxlength="250" placeholder="Enter address">
+                </div>
+            </div>
+
+            <div class="actions">
+                <button class="primary" type="submit" id="saveButton">
+                    Save Employee
+                </button>
+                <button class="secondary" type="button" id="clearButton">Clear Form
+                </button>
+            </div>
+        </form>
+
+        <p class="muted">
+            Fields marked with * are required.
+        </p>
+    </section>
+
+    <section class="card">
+        <h2>Employees</h2>
+
+        <div class="search-row">
+            <input type="number" id="searchId" placeholder="Search by employee ID">
+            <button class="primary" id="searchButton" type="button">
+                Search by ID
+            </button>
+            <button class="secondary" id="showAllButton" type="button">
+                Show All
+            </button>
+            <button class="secondary" id="refreshButton" type="button">
+                Refresh
+            </button>
+        </div>
+
+        <p id="employeeCount" class="muted">Loading employees...</p>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Job Type</th>
+                    <th>Designation</th>
+                    <th>Department</th>
+                    <th>Salary</th>
+                    <th>Address</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody id="employeeTable">
+                <tr>
+                    <td colspan="9">Loading employees...</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<script>
+    const API_URL = "/api/employees";
+
+    const form = document.getElementById("employeeForm");
+    const table = document.getElementById("employeeTable");
+    const message = document.getElementById("message");
+    const count = document.getElementById("employeeCount");
+    const saveButton = document.getElementById("saveButton");
+
+    let editingId = null;
+    let employees = [];
+
+    function showMessage(text, type = "success") {
+        message.textContent = text;
+        message.className = "message " + type;
+    }
+
+    function clearMessage() {
+        message.textContent = "";
+        message.className = "message";
+    }
+
+    async function apiRequest(url, options = {}) {
+        const response = await fetch(url, {
+            ...options,
+            headers: {
+                ...(options.body ? {
+                    "Content-Type": "application/json"
+                } : {}),
+                ...options.headers
+            }
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(errorText || `Request failed (${response.status})`);
+        }
+
+        if (response.status === 204) {
+            return null;
+        }
+
+        const text = await response.text();
+        return text ? JSON.parse(text) : null;
+    }
+
+    function getAddress(employee) {
+        const address = employee.address ?? employee.addressEntity;
+
+        if (!address) {
+            return "";
+        }
+
+        return typeof address === "string" ? address : address.address ?? "";
+    }
+
+    function escapeHtml(value) {
+        return String(value ?? "").replace(/[&<>"']/g, character => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        })[character]);
+    }
+
+    function renderEmployees(data) {
+        employees = Array.isArray(data) ? data : [];
+
+        count.textContent = `${employees.length} employee(s) found`;
+
+        if (employees.length === 0) {
+            table.innerHTML = `
+                <tr>
+                    <td colspan="9">No employees found.</td>
+                </tr>`;
+            return;
+        }
+
+        table.innerHTML = employees.map(employee => `
+            <tr>
+                <td>${escapeHtml(employee.id)}</td>
+                <td>${escapeHtml(employee.name)}</td>
+                <td>${escapeHtml(employee.email)}</td>
+                <td>${escapeHtml(employee.jobType)}</td>
+                <td>${escapeHtml(employee.designation)}</td>
+                <td>${escapeHtml(employee.department)}</td>
+                <td>${escapeHtml(employee.salary)}</td>
+                <td>${escapeHtml(getAddress(employee))}</td>
+                <td>
+                    <button class="primary small" data-action="edit" data-id="${escapeHtml(employee.id)}">
+                        Edit
+                    </button>
+                    <button class="danger small" data-action="delete" data-id="${escapeHtml(employee.id)}">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        `).join("");
+    }
+
+    async function loadEmployees() {
+        clearMessage();
+        count.textContent = "Loading employees...";
+
+        try {
+            const data = await apiRequest(API_URL);
+            renderEmployees(data);
+        } catch (error) {
+            table.innerHTML = `
+                <tr>
+                    <td colspan="9">Unable to load employees.</td>
+                </tr>`;
+            count.textContent = "";
+            showMessage(error.message, "error");
+        }
+    }
+
+    function resetForm() {
+        form.reset();
+        document.getElementById("salary").value = "0";
+        editingId = null;
+        document.getElementById("formTitle").textContent = "Add Employee";
+        saveButton.textContent = "Save Employee";
+    }
+
+    function readForm() {
+        return {
+            name: document.getElementById("name").value.trim(),
+            email: document.getElementById("email").value.trim(),
+            jobType: document.getElementById("jobType").value,
+            designation: document.getElementById("designation").value.trim(),
+            department: document.getElementById("department").value.trim(),
+            salary: Number(document.getElementById("salary").value),
+            address: {
+                address: document.getElementById("address").value.trim()
+            }
+        };
+    }
+
+    form.addEventListener("submit", async event => {
+        event.preventDefault();
+        clearMessage();
+
+        const employee = readForm();
+
+        if (!employee.name || !employee.email) {
+            showMessage("Name and email are required.", "error");
+            return;
+        }
+
+        if (!Number.isFinite(employee.salary) || employee.salary < 0) {
+            showMessage("Please enter a valid non-negative salary.", "error");
+            return;
+        }
+
+        const isEditing = editingId !== null;
+        const url = isEditing ? `${API_URL}/${encodeURIComponent(editingId)}` : API_URL;
+
+        saveButton.disabled = true;
+
+        try {
+            await apiRequest(url, {
+                method: isEditing ? "PUT" : "POST",
+                body: JSON.stringify(employee)
+            });
+
+            showMessage(isEditing ? "Employee updated successfully." : "Employee added successfully.");
+
+            resetForm();
+            await loadEmployees();
+        } catch (error) {
+            showMessage(error.message, "error");
+        } finally {
+            saveButton.disabled = false;
+        }
+    });
+
+    document.getElementById("clearButton").addEventListener("click", () => {
+        resetForm();
+        clearMessage();
+    });
+
+    document.getElementById("refreshButton").addEventListener("click", loadEmployees);
+
+    document.getElementById("showAllButton").addEventListener("click", loadEmployees);
+
+    document.getElementById("searchButton").addEventListener(
+        "click", async () => {
+            const id = document.getElementById("searchId").value.trim();
+
+            if (!id || !Number.isSafeInteger(Number(id)) || Number(id) <= 0) {
+                showMessage("Enter a valid employee ID.", "error");
+                return;
+            }
+
+            clearMessage();
+
+            try {
+                const employee = await apiRequest(
+                    `${API_URL}/${encodeURIComponent(id)}`
+                );
+                renderEmployees(employee ? [employee] : []);
+            } catch (error) {
+                renderEmployees([]);
+                showMessage(error.message, "error");
+            }
+        }
+    );
+
+    table.addEventListener("click", async event => {
+        const button = event.target.closest("button[data-action]");
+
+        if (!button) {
+            return;
+        }
+
+        const id = button.dataset.id;
+        const employee = employees.find(item => String(item.id) === String(id));
+
+        if (!employee) {
+            showMessage("Employee not found in the current list.", "error");
+            return;
+        }
+
+        if (button.dataset.action === "edit") {
+            editingId = employee.id;
+
+            document.getElementById("name").value = employee.name ?? "";
+            document.getElementById("email").value = employee.email ?? "";
+            document.getElementById("jobType").value = employee.jobType ?? "";
+            document.getElementById("designation").value = employee.designation ?? "";
+            document.getElementById("department").value = employee.department ?? "";
+            document.getElementById("salary").value = employee.salary ?? 0;
+            document.getElementById("address").value = getAddress(employee);
+
+            document.getElementById("formTitle").textContent = `Edit Employee #${employee.id}`;
+            saveButton.textContent = "Update Employee";
+
+            window.scrollTo({top: 0, behavior: "smooth"});
+        }
+
+        if (button.dataset.action === "delete") {
+            if (!confirm(`Delete employee "${employee.name}" (ID: ${id})?`)) {
+                return;
+            }
+
+            clearMessage();
+
+            try {
+                await apiRequest(
+                    `${API_URL}/${encodeURIComponent(id)}`,
+                    {method: "DELETE"}
+                );
+
+                if (String(editingId) === String(id)) {
+                    resetForm();
+                }
+
+                showMessage("Employee deleted successfully.");
+                await loadEmployees();
+            } catch (error) {
+                showMessage(error.message, "error");
+            }
+        }
+    });
+
+    loadEmployees();
+</script>
+</body>
+</html>

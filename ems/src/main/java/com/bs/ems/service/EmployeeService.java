@@ -6,7 +6,9 @@ import com.bs.ems.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
@@ -25,10 +27,28 @@ public class EmployeeService {
                 .designation(employee.getDesignation())
                 .department(employee.getDepartment())
                 .salary(employee.getSalary())
+                .address(employee.getAddress())
                 .build();
 
         EmployeeEntity savedEntity = employeeRepository.save(entity);
         return mapToDTO(savedEntity);
+    }
+
+    public List<Employee> saveAllEmployee(List<Employee> employees) {
+        List<EmployeeEntity> entityList = new ArrayList<>();
+        for (Employee employee : employees) {
+            entityList.add(EmployeeEntity.builder()
+                    .name(employee.getName())
+                    .email(employee.getEmail())
+                    .jobType(employee.getJobType())
+                    .designation(employee.getDesignation())
+                    .department(employee.getDepartment())
+                    .salary(employee.getSalary())
+                    .address(employee.getAddress())
+                    .build());
+        }
+        List<EmployeeEntity> savedEntity = employeeRepository.saveAll(entityList);
+        return savedEntity.stream().map(this::mapToDTO).collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
@@ -53,6 +73,7 @@ public class EmployeeService {
         existingEmployee.setDesignation(employeeDetails.getDesignation());
         existingEmployee.setDepartment(employeeDetails.getDepartment());
         existingEmployee.setSalary(employeeDetails.getSalary());
+        existingEmployee.setAddress(employeeDetails.getAddress());
 
         EmployeeEntity updatedEntity = employeeRepository.save(existingEmployee);
 
@@ -74,6 +95,7 @@ public class EmployeeService {
                 .designation(entity.getDesignation())
                 .department(entity.getDepartment())
                 .salary(entity.getSalary())
+                .address(entity.getAddress())
                 .build();
     }
 }

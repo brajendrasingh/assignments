@@ -18,5 +18,5 @@ public class Employee {
     private String designation;
     private String department;
     private double salary;
-    private AddressEntity addressEntity;
+    private AddressEntity address;
 }
