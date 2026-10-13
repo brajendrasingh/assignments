@@ -3,6 +3,8 @@ package com.bs.ems.service;
 import com.bs.ems.dto.Employee;
 import com.bs.ems.entities.EmployeeEntity;
 import com.bs.ems.repository.EmployeeRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,6 +56,12 @@ public class EmployeeService {
     @Transactional(readOnly = true)
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll().stream().map(this::mapToDTO).toList();
+    }
+
+    // Pagination + sorting
+    @Transactional(readOnly = true)
+    public Page<Employee> getAllEmployees(Pageable pageable) {
+        return employeeRepository.findAll(pageable).map(this::mapToDTO);
     }
 
     public Employee getEmployeeById(Long id) {

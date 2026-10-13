@@ -1,24 +1,156 @@
 [
-    {
-        "name": "Arjun Sharma",
-        "email": "arjun.sharma@example.com",
-        "jobType": "Full-Time",
-        "designation": "Senior Software Engineer",
-        "department": "Engineering",
-        "salary": 85000.50,
-        "address": {
-            "address": "123 Tech Park Avenue, Sector 62, Noida, UP, 201301"
-        }
-    },
-    {
-        "name": "Raj Malhotra",
-        "email": "raj.malhotra@example.com",
-        "jobType": "Part-Time",
-        "designation": "Staff Software Engineer",
-        "department": "Engineering",
-        "salary": 95000.50,
-        "address": {
-            "address": "123 Tech Park Avenue, Sector 65, Noida, UP, 201301"
-        }
+  {
+    "name": "Arjun Sharma",
+    "email": "arjun.sharma@example.com",
+    "jobType": "Full-Time",
+    "designation": "Senior Software Engineer",
+    "department": "Engineering",
+    "salary": 85000.50,
+    "address": {
+      "address": "123 Tech Park Avenue, Sector 62, Noida, UP, 201301"
     }
+  },
+  {
+    "name": "Raj Malhotra",
+    "email": "raj.malhotra@example.com",
+    "jobType": "Part-Time",
+    "designation": "Staff Software Engineer",
+    "department": "Engineering",
+    "salary": 95000.50,
+    "address": {
+      "address": "123 Tech Park Avenue, Sector 65, Noida, UP, 201301"
+    }
+  },
+  {
+    "name": "Rahul",
+    "email": "rahul@example.com",
+    "jobType": "Full-time",
+    "designation": "Software Engineer",
+    "department": "Engineering",
+    "salary": 75000.0,
+    "address": {
+      "address": "132 Tech Park Avenue, Sector 44, Gurgaon, Haryana, 101301"
+    }
+  },
+  {
+    "name": "Priya Nair",
+    "email": "priya.nair@example.com",
+    "jobType": "Full-Time",
+    "designation": "HR Manager",
+    "department": "Human Resources",
+    "salary": 68000.00,
+    "address": {
+      "address": "45 Green Glen Layout, Outer Ring Road, Bengaluru, Karnataka, 560103"
+    }
+  },
+  {
+    "name": "Ananya Desai",
+    "email": "ananya.desai@example.com",
+    "jobType": "Full-Time",
+    "designation": "Product Manager",
+    "department": "Product Management",
+    "salary": 110000.00,
+    "address": {
+      "address": "Hitech City Main Road, Phase 2, Hyderabad, Telangana, 500081"
+    }
+  },
+  {
+    "name": "Vikram Joshi",
+    "email": "vikram.joshi@example.com",
+    "jobType": "Contract",
+    "designation": "DevOps Consultant",
+    "department": "Infrastructure",
+    "salary": 125000.00,
+    "address": {
+      "address": "78 Rajiv Gandhi Salai, Taramani, Chennai, Tamil Nadu, 600113"
+    }
+  },
+  {
+    "name": "Sneha Kulkarni",
+    "email": "sneha.k@example.com",
+    "jobType": "Full-Time",
+    "designation": "UI/UX Designer",
+    "department": "Design",
+    "salary": 62000.75,
+    "address": {
+      "address": "Bandra Kurla Complex, G Block, Mumbai, Maharashtra, 400051"
+    }
+  },
+  {
+    "name": "Rohan Das",
+    "email": "rohan.das@example.com",
+    "jobType": "Full-Time",
+    "designation": "QA Automation Engineer",
+    "department": "Engineering",
+    "salary": 58000.00,
+    "address": {
+      "address": "Salt Lake Sector V, Electronic Complex, Kolkata, West Bengal, 700091"
+    }
+  },
+  {
+    "name": "Meera Reddy",
+    "email": "meera.r@example.com",
+    "jobType": "Part-Time",
+    "designation": "Data Analyst",
+    "department": "Analytics",
+    "salary": 45000.00,
+    "address": {
+      "address": "EPIP Zone, Whitefield, Bengaluru, Karnataka, 560066"
+    }
+  },
+  {
+    "name": "Amit Verma",
+    "email": "amit.verma@example.com",
+    "jobType": "Full-Time",
+    "designation": "Solutions Architect",
+    "department": "Engineering",
+    "salary": 145000.00,
+    "address": {
+      "address": "Magarpatta Cybercity, Tower 4, Pune, Maharashtra, 411028"
+    }
+  },
+  {
+    "name": "Karan Kapoor",
+    "email": "karan.kapoor@example.com",
+    "jobType": "Full-Time",
+    "designation": "Security Engineer",
+    "department": "Infrastructure",
+    "salary": 92000.00,
+    "address": {
+      "address": "DLF Cyber City, Phase 3, Gurgaon, Haryana, 122002"
+    }
+  },
+  {
+    "name": "Divya Teja",
+    "email": "divya.teja@example.com",
+    "jobType": "Contract",
+    "designation": "Data Scientist",
+    "department": "Analytics",
+    "salary": 135000.75,
+    "address": {
+      "address": "Gachibowli Financial District, Nanakramguda, Hyderabad, Telangana, 500032"
+    }
+  },
+  {
+    "name": "Riya Sen",
+    "email": "riya.sen@example.com",
+    "jobType": "Full-Time",
+    "designation": "Scrum Master",
+    "department": "Product Management",
+    "salary": 88000.00,
+    "address": {
+      "address": "Manyata Tech Park, Hebbal, Bengaluru, Karnataka, 560045"
+    }
+  },
+  {
+    "name": "Aditya Joshi",
+    "email": "aditya.j@example.com",
+    "jobType": "Full-Time",
+    "designation": "Backend Developer",
+    "department": "Engineering",
+    "salary": 71000.50,
+    "address": {
+      "address": "Hinjawadi Phase 1, Rajiv Gandhi Infotech Park, Pune, Maharashtra, 411057"
+    }
+  }
 ]
