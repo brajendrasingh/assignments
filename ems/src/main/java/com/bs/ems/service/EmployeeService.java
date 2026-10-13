@@ -81,8 +81,13 @@ public class EmployeeService {
         existingEmployee.setDesignation(employeeDetails.getDesignation());
         existingEmployee.setDepartment(employeeDetails.getDepartment());
         existingEmployee.setSalary(employeeDetails.getSalary());
-        existingEmployee.setAddress(employeeDetails.getAddress());
-
+        if (employeeDetails.getAddress() != null) {
+            if (existingEmployee.getAddress() == null) {
+                existingEmployee.setAddress(employeeDetails.getAddress());
+            } else {
+                existingEmployee.getAddress().setAddress(employeeDetails.getAddress().getAddress());
+            }
+        }
         EmployeeEntity updatedEntity = employeeRepository.save(existingEmployee);
 
         return mapToDTO(updatedEntity);
