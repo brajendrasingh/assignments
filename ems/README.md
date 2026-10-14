@@ -124,21 +124,18 @@ gradlew.bat bootRun
 http://localhost:8080/index.html
 ```
 
-## 7. REST API Endpoints
-
-The frontend expects the following API endpoints:
+## 7. REST API Endpoints for accessing from postman & UI
 
 | HTTP Method | Endpoint | Description |
 |---|---|---|
 | POST | `/api/employees` | Create an employee |
+| POST | `/api/employees/addAll` | Create a list of employee |
 | GET | `/api/employees/{id}` | Retrieve an employee by ID |
+| GET | `/api/employees` | Retrieve all employee list |
 | GET | `/api/employees/paged?page=0&size=5` | Retrieve a paginated employee list |
-| PUT | `/api/employees/{id}` | Update an employee |
-| DELETE | `/api/employees/{id}` | Delete an employee |
+| PUT | `/api/employees/{id}` | Update an employee by ID |
+| DELETE | `/api/employees/{id}` | Delete an employee by ID |
 
-The paginated endpoint should return a Spring Data `Page` response containing fields such as:
 
-- `content` — employees on the current page
-- `number` — zero-based current page number
-- `totalPages` — total number of pages
-- `totalElements` — total number of matching employees
+## 8. Optional: Initial data seeding
+There is a folder testData that contains a file(payload.txt) which contains json payload for adding employees using postman so if you want to create initial data then you can use this.

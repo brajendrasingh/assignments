@@ -18,6 +18,8 @@ repositories {
 }
 
 dependencies {
+	//actuator for metrics
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	//H2 database
 	implementation("com.h2database:h2:2.5.252")
 	//For h2 db console only

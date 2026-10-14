@@ -3,6 +3,7 @@ package com.bs.ems.service;
 import com.bs.ems.dto.Employee;
 import com.bs.ems.entities.EmployeeEntity;
 import com.bs.ems.repository.EmployeeRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class EmployeeService {
 
@@ -22,6 +24,7 @@ public class EmployeeService {
     }
 
     public Employee saveEmployee(Employee employee) {
+        log.info("EmployeeService: add an employee");
         EmployeeEntity entity = EmployeeEntity.builder()
                 .name(employee.getName())
                 .email(employee.getEmail())
@@ -37,6 +40,7 @@ public class EmployeeService {
     }
 
     public List<Employee> saveAllEmployee(List<Employee> employees) {
+        log.info("EmployeeService: add list of employees");
         List<EmployeeEntity> entityList = new ArrayList<>();
         for (Employee employee : employees) {
             entityList.add(EmployeeEntity.builder()
@@ -55,16 +59,19 @@ public class EmployeeService {
 
     @Transactional(readOnly = true)
     public List<Employee> getAllEmployees() {
+        log.info("EmployeeService: get all employees");
         return employeeRepository.findAll().stream().map(this::mapToDTO).toList();
     }
 
     // Pagination + sorting
     @Transactional(readOnly = true)
     public Page<Employee> getAllEmployees(Pageable pageable) {
+        log.info("EmployeeService: get all employees by pagination");
         return employeeRepository.findAll(pageable).map(this::mapToDTO);
     }
 
     public Employee getEmployeeById(Long id) {
+        log.info("EmployeeService: get employee by id");
         EmployeeEntity entity = employeeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
 
@@ -72,6 +79,7 @@ public class EmployeeService {
     }
 
     public Employee updateEmployee(Long id, Employee employeeDetails) {
+        log.info("EmployeeService: update employee by id");
         EmployeeEntity existingEmployee = employeeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
 
@@ -94,12 +102,13 @@ public class EmployeeService {
     }
 
     public void deleteEmployee(Long id) {
+        log.info("EmployeeService: delete employee by id");
         EmployeeEntity existingEmployee = employeeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
         employeeRepository.delete(existingEmployee);
     }
 
-    // Entity -> DTO
+    // Entity to -> DTO
     private Employee mapToDTO(EmployeeEntity entity) {
         return Employee.builder().id(entity.getId())
                 .name(entity.getName())

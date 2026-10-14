@@ -1,0 +1,22 @@
+services:
+  ems:
+    image: ems:1.0
+    build:
+      context: ./../
+      dockerfile: Dockerfile
+    container_name: ems
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    networks:
+      - ems-network
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+volumes:
+  ems-data:
+
+networks:
+  ems-network:
+    external: true
+    
